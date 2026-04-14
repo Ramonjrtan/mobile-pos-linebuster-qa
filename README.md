@@ -1,6 +1,6 @@
 # Mobile POS Pre-Scanning QA Portfolio
 
-Senior-level QA portfolio for a sanitized mobile POS pre-scanning solution.
+Senior-level QA portfolio for a mobile POS pre-scanning solution.
 
 ## Disclaimer
 This repository is a fully sanitized and generalized simulation based on common retail and transaction system patterns.
