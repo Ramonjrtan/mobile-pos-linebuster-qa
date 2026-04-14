@@ -1,0 +1,33 @@
+{
+  "info": {
+    "name": "LineBuster QA Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Transaction",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/transactions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"items\": [{\"id\": \"123\", \"qty\": 1}]}"
+        }
+      }
+    },
+    {
+      "name": "Get Transaction",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/transactions/1"
+      }
+    },
+    {
+      "name": "Complete Transaction",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/transactions/1/complete"
+      }
+    }
+  ]
+}
