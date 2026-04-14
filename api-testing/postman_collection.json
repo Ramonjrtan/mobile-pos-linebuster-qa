@@ -1,32 +1,178 @@
 {
   "info": {
-    "name": "LineBuster QA Collection",
+    "name": "Mobile POS Pre-Scanning QA Collection",
+    "description": "Sanitized collection for transaction lifecycle validation.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://example.test"
+    },
+    {
+      "key": "transactionId",
+      "value": "TXN-1001"
+    },
+    {
+      "key": "barcode",
+      "value": "LB-20260414-1001"
+    }
+  ],
   "item": [
     {
-      "name": "Create Transaction",
+      "name": "Start Transaction",
       "request": {
         "method": "POST",
-        "url": "{{baseUrl}}/api/transactions",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/start",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "start"
+          ]
+        },
         "body": {
           "mode": "raw",
-          "raw": "{\"items\": [{\"id\": \"123\", \"qty\": 1}]}"
+          "raw": "{\"operatorId\": \"OP-01\", \"deviceId\": \"HH-01\"}"
         }
       }
     },
     {
-      "name": "Get Transaction",
+      "name": "Add Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/{{transactionId}}/items",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "{{transactionId}}",
+            "items"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"sku\": \"SKU-10001\", \"description\": \"Cereal 500g\", \"qty\": 1, \"unitPrice\": 3.99}"
+        }
+      }
+    },
+    {
+      "name": "Submit Basket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/{{transactionId}}/submit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "{{transactionId}}",
+            "submit"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"printerReady\": true}"
+        }
+      }
+    },
+    {
+      "name": "Retrieve Basket By Barcode",
       "request": {
         "method": "GET",
-        "url": "{{baseUrl}}/api/transactions/1"
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/{{barcode}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "{{barcode}}"
+          ]
+        }
       }
     },
     {
       "name": "Complete Transaction",
       "request": {
         "method": "POST",
-        "url": "{{baseUrl}}/api/transactions/1/complete"
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/{{transactionId}}/complete",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "{{transactionId}}",
+            "complete"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tenderType\": \"CARD\", \"amount\": 12.47}"
+        }
+      }
+    },
+    {
+      "name": "Reprint Last Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/transactions/{{transactionId}}/reprint",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "transactions",
+            "{{transactionId}}",
+            "reprint"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"reason\": \"printer_jam\"}"
+        }
       }
     }
   ]
