@@ -3,7 +3,7 @@
 Senior-level QA portfolio for a mobile POS pre-scanning solution.
 
 ## Disclaimer
-This repository is a fully sanitized and generalized simulation based on common retail and transaction system patterns.
+This repository is a generalized simulation based on common retail and transaction system patterns.
 It does not represent any specific company, client, or proprietary system.
 All workflows, data, APIs, and scenarios are fictionalized for demonstration purposes only.
 
